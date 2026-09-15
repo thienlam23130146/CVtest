@@ -1,0 +1,12 @@
+.about-photo-wrap {
+  width: 100%;
+  max-width: 320px;
+}
+
+.about-photo {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
