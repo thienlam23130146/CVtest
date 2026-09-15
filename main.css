@@ -10,3 +10,8 @@
   height: auto;
   object-fit: cover;
 }
+
+.image-full {
+  width: 1100px; 
+  height: 800px;
+}
