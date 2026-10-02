@@ -7,43 +7,57 @@
     <link rel='stylesheet' href='main.css'>
 </head>
 <body>
-  <header class="site-header">
-  <a class="logo" src="image/yyayay.png"></a>
-  <nav class="site-nav">
+  <!-- <button id="theme-toggle">Dark mode</button>
+  <a class="logo" src="image/yyayay.png"></a> -->
+  <img class="avata-bg hero container" src="image/GonNiuuyen.jpg" alt="">
+  <nav class="site-nav site-header container">
     <ul>
-      <li><a href="#about">Giới thiệu</a></li>
-      <li><a href="#projects">Dự án</a></li>
-      <li><a href="#contact">Liên hệ</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Project</a></li>
+      <li><a href="#Artwork">Artwork</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
-</header>
 <main class="container">
-  <section id="about" style="background-image: url(./image/331006650_610075640939304_6360738638066850714_n.jpg);" class="background_img hero card" >
-      <div>
+  <section id="about" class="background_img hero card">
+      <div style="margin-block: 5%">
         <h1>I'm Nguyen Thi Thien Lam</h1>
         <p>Welcome to the chaotic world of me</p>
         <a class="button" href="#contact">contract</a>
       </div>
-    <img src="image/my face.jpg" alt="Blue vs Kata" class="image-full"> 
+      <img src="image/my face.jpg" alt="">
   </section>
   <section id="projects">
-    <h2>Artwork</h2>
-    <div class="projects">
-      <article class="card">
-        <h3>Zent 10 years old</h3>
-        <div>
-            <img src="image/Zent_10t.jpg" alt="Blue" class="image-full">
-        </div>
-        <p>Ruins and ashes are what remain of the world, but it is also the beginning of a new era for a genius </p>
-      </article>
-      <article class="card">
-        <h3>Zent 16 years old</h3>
-        <div>
-            <img src="image/zent_16t.jpg" alt="Blue" class="image-full">
-        </div>
-        <p></p>
-      </article>
+    <div class="project-header">
+      <h2>My Projects</h2>
+      <div id="filters"> </div>
     </div>
+    
+    <!-- <div id="project-list" class="projects">-->
+      <!-- <template id="project-card">
+        <div class="hero">
+          <img class="image-full card" src="" alt="">
+          <lis>
+            <h3 style="margin-block: 2px;"></h3>
+            <p class="tags" style="margin-block-start: 0"></p>
+          </lis>
+        </div>
+      </template> </div> -->
+      <div class="hero container">
+        <div class="project-preview">
+          <img id="preview-img" class="image-full card" src="" alt="">
+        </div>
+        <ul id="project-list" class="projects-list"></ul>
+        <template id="project-card">
+          <lis class="project-item">
+            <h3 style="margin-block: 2px;"></h3>
+            <p class="tags" style="margin-block-start: 0"></p>
+          </lis>
+        </template>
+      </div>
+  </section>
+  <section id="Artwork">
+    <h2>My Artwork</h2>
   </section>
   <section id="contact">
     <h2>Liên hệ</h2>
@@ -65,7 +79,7 @@
     </form>
   </section>
 </main>
-  
 <footer>© 2026 Nguyen Thi Thien Lam</footer>
+<script type="module" src="./app.js"></script>
 </body>
 </html>
