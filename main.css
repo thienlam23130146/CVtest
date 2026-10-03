@@ -58,7 +58,8 @@ lis{
 }
 .site-nav ul {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nơwrap;
+  flex-direction: row-reverse;
   /* gap: 0.5rem 1.25rem; */
   /* gap: [hàng] [cột]  */
   gap: 2.5rem;
