@@ -62,7 +62,7 @@ lis{
   flex-direction: row-reverse;
   /* gap: 0.5rem 1.25rem; */
   /* gap: [hàng] [cột]  */
-  gap: 2.5rem;
+  gap: 20%;
   margin: 0;
   padding: 0;
   list-style: none;
