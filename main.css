@@ -10,7 +10,7 @@
 }
 
 html {
-  scroll-padding-top: 40px; 
+  scroll-padding-top: 80px; 
   scroll-behavior: smooth; 
 }
 
@@ -35,6 +35,17 @@ lis{
   display: grid; 
   border-bottom: 1px solid; 
   padding: 0px;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+  unicode-bidi: isolate;
 }
 
 .project-header {
@@ -77,16 +88,25 @@ a { color: inherit; }
   margin-inline: auto;
   padding-inline: var(--space);
 }
+
 .hero {
   display: grid;
   gap: 2rem;
   align-items: center;
   padding-block: 3rem;
 }
+
 .hero h1 {
   font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
   line-height: 1;
   margin-block: 0.7rem;
+}
+
+.hero-center{
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: 0px 20px ;
 }
 
 .field {
@@ -166,11 +186,10 @@ input, textarea {
 }
 
 .project-item {
-  padding: 1rem;
-  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  border: 1px solid transparent;
+  /* border: 1px solid transparent; */
+  border-bottom: 1px solid;
 }
 
 .project-item:hover {
@@ -178,19 +197,54 @@ input, textarea {
   border-color: #e2e8f0;
 }
 
+#filters{
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 10px;
+}
+
 .filter-set{
-  background-color: white;
-  color: rgb(8, 8, 55);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: 8px 8px;
+  /* border-radius: 8px; */
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.1s;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .filter-set:hover {
-  background-color: rgb(8, 8, 55);
+  background-color: var(--color-accent);
   color: white;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+#project-search {
+  padding: 10px 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 20px;
+  font-size: 15px;
+  width: 100%;
+  /* max-width: 300px; */
+  background-color: var(--bg-color, #ffffff);
+  color: var(--text-color, #333);
+  transition: all 0.3s ease;
+  outline: none;
+  margin-block: 10px;
+}
+
+#project-search:focus {
+  border-color: #0f766e; /* Viền chuyển màu xanh khi đang gõ */
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); /* Tỏa sáng nhẹ */
 }
 
 .avata-bg{
@@ -199,8 +253,85 @@ input, textarea {
   object-fit: cover;
 }
 
+/* Khung ngoài cùng giới hạn khu vực hiển thị */
+.artwork-carousel {
+  position: relative;
+  width: 100%;
+  height: 450px; /* Đủ không gian cho ảnh to và chữ */
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+/* Các thẻ chứa ảnh và chữ */
+.art-item {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  /* Mặc định ở trạng thái ẩn */
+  transform: translate(-50%, -50%) scale(0.5); 
+  opacity: 0;
+  z-index: 1;
+  text-align: center;
+  transition: all 0.6s ease-in-out; /* Tạo độ mượt khi trôi */
+  pointer-events: none; /* Không cho click khi đang ẩn */
+}
+
+/* Định dạng ảnh mặc định (Ảnh ở 2 bên) */
+.art-item img {
+  height: 200px; /* Chiều cao ảnh 2 bên */
+  width: auto;
+  object-fit: contain; /* Giữ nguyên tỷ lệ, không bị cắt xén */
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.6s ease-in-out;
+}
+
+/* Định dạng tên hình */
+.art-caption {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* --- TRẠNG THÁI 1: ẢNH TRUNG TÂM (Active) --- */
+.art-item.active {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto; /* Bật click */
+}
+.art-item.active img {
+  height: 300px; /* To gấp 1.5 lần so với 200px */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Bóng đậm hơn */
+}
+.art-item.active .art-caption {
+  opacity: 1; /* Hiện tên hình */
+}
+
+/* --- TRẠNG THÁI 2: ẢNH BÊN TRÁI (Prev) --- */
+.art-item.prev {
+  transform: translate(calc(-50% - 280px), -50%); /* Đẩy sang trái 280px */
+  opacity: 0.6; /* Hơi mờ đi */
+  z-index: 5;
+  pointer-events: auto;
+}
+
+/* --- TRẠNG THÁI 3: ẢNH BÊN PHẢI (Next) --- */
+.art-item.next {
+  transform: translate(calc(-50% + 280px), -50%); /* Đẩy sang phải 280px */
+  opacity: 0.6;
+  z-index: 5;
+  pointer-events: auto;
+}
+
 @media (min-width: 48rem) {
   .hero { grid-template-columns: 2fr 1fr; }
+
+  .hero-center {grid-template-columns: 1fr 1fr; }
 }
 
 :root.dark {

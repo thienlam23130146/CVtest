@@ -9,24 +9,6 @@ const previewImg = document.querySelector(
 // Ảnh mặc định nếu dự án không có link_img
 const fallbackImg = 'image/Zent_16t.jpg';
 
-// hàm để hiện thỉ list
-// function render(list) {
-//   ul.textContent = ''; //dọn sạch các dự án cũ đang hiển thị
-//   for (const p of list) {
-//     const li = tpl.content
-//       .cloneNode(true);// nhân bản sâu thẻ <template>
-//     li.querySelector('h3')
-//       .textContent = p.title;//title
-//     li.querySelector('.tags')
-//       .textContent = p.tags.join(', ');//tag
-//     const imgElement = li.querySelector('img.image-full');
-//     if (p.link_img) {
-//       imgElement.src = p.link_img;
-//       imgElement.alt = p.title;
-//     }
-//     ul.append(li);
-//   }
-// }
 function render(list) {
   ul.textContent = ''; 
 
@@ -84,6 +66,21 @@ bar.addEventListener('click', (e) => {
   render(filtered);
 });
 
+const searchInput = document.querySelector('#project-search');
+
+searchInput.addEventListener('input', (e) => {
+
+  const keyword = e.target.value.toLowerCase().trim();
+
+  const searchedProjects = projects.filter(p => {
+    return p.title.toLowerCase().includes(keyword);
+  });
+
+  document.querySelectorAll('.filter-set').forEach(btn => btn.classList.remove('active'));
+  
+  render(searchedProjects);
+});
+
 const toggle = document.querySelector(
   '#theme-toggle');
 const root = document.documentElement;
@@ -92,27 +89,86 @@ toggle.addEventListener('click', () => {
   root.classList.toggle('white');
 });
 
+// artwwork
+// Dữ liệu mẫu (Bạn có thể thay bằng link ảnh của bạn)
+const artworksData = [
+  { title: "Bức tranh 1", link_img: "image/Zent_16t.jpg" },
+  { title: "Bức tranh 2", link_img: "image/GonNiuuyen.jpg" },
+  { title: "Bức tranh 3", link_img: "image/my face.jpg" },
+  { title: "Bức tranh 4", link_img: "image/Zent_16t.jpg" }, // Thêm nhiều ảnh để thấy rõ hiệu ứng vòng lặp
+  { title: "Bức tranh 5", link_img: "image/GonNiuuyen.jpg" }
+];
 
-// const projectList = document.querySelector('#project-list');
+const artTrack = document.querySelector('#artwork-track');
+let currentArt = 0; // Lưu vị trí ảnh đang ở giữa
+let artElements = []; // Mảng chứa các thẻ HTML
+let autoScrollTimer;
 
-// projects.forEach(project => {
-//     const article = document.createElement('article');
+// Hàm 1: Khởi tạo các thẻ ảnh lên màn hình
+function initArtwork() {
+  artworksData.forEach((art, index) => {
+    const div = document.createElement('div');
+    div.className = 'art-item';
+    div.innerHTML = `
+      <img src="${art.link_img}" alt="${art.title}">
+      <div class="art-caption">${art.title}</div>
+    `;
 
-//     article.classList.add('card');
+    // Lắng nghe sự kiện click: Bấm vào ảnh nào thì ảnh đó ra giữa
+    div.addEventListener('click', () => {
+      currentArt = index; // Cập nhật lại trung tâm
+      updateCarousel();   // Di chuyển các ảnh
+      resetAutoScroll();  // Reset lại bộ đếm thời gian trôi tự động
+    });
 
-//     article.innerHTML = `
-//         <img
-//             src="${project.link_img}"
-//             alt="${project.title}"
-//             class="image-full"
-//         >
+    artTrack.appendChild(div);
+    artElements.push(div);
+  });
 
-//         <h3>${project.title}</h3>
+  updateCarousel();
+  startAutoScroll(); // Bắt đầu tự cuộn
+}
 
-//         <p>
-//             Tags: ${project.tags.join(', ')}
-//         </p>
-//     `;
+// Hàm 2: Cập nhật vị trí và kích thước của các ảnh
+function updateCarousel() {
+  const len = artElements.length;
+  
+  // Tính toán vị trí của ảnh bên trái và bên phải
+  // Công thức % len giúp tạo vòng lặp vô tận (từ cuối nhảy về đầu)
+  const prevIndex = (currentArt - 1 + len) % len;
+  const nextIndex = (currentArt + 1) % len;
 
-//     projectList.appendChild(article);
-// });
+  artElements.forEach((el, index) => {
+    // Xóa hết các trạng thái cũ
+    el.className = 'art-item'; 
+
+    // Gán trạng thái mới
+    if (index === currentArt) {
+      el.classList.add('active'); // Ở giữa
+    } else if (index === prevIndex) {
+      el.classList.add('prev');   // Bên trái
+    } else if (index === nextIndex) {
+      el.classList.add('next');   // Bên phải
+    }
+  });
+}
+
+// Hàm 3: Di chuyển sang ảnh tiếp theo (Cuộn từ phải sang trái)
+function slideNext() {
+  currentArt = (currentArt + 1) % artElements.length;
+  updateCarousel();
+}
+
+// Hàm 4: Quản lý thời gian tự động cuộn
+function startAutoScroll() {
+  // Cứ sau 3 giây (3000ms) sẽ tự động chạy hàm slideNext 1 lần
+  autoScrollTimer = setInterval(slideNext, 3000); 
+}
+
+function resetAutoScroll() {
+  clearInterval(autoScrollTimer); // Tạm dừng
+  startAutoScroll(); // Khởi động lại
+}
+
+// Gọi hàm chạy lần đầu tiên
+initArtwork();

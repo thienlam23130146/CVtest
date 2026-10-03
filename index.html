@@ -28,36 +28,36 @@
       <img src="image/my face.jpg" alt="">
   </section>
   <section id="projects">
-    <div class="project-header">
-      <h2>My Projects</h2>
-      <div id="filters"> </div>
+    <div class="project-header hero-center">
+      <div>
+        <h2>My Projects</h2>
+        <!-- <div style="gap:0px;" id="filters"></div> -->
+      </div>
+      <search class="search-container">
+        <input type="search" id="project-search" placeholder="Searching...">
+        <div style="gap:0px;" id="filters"></div>
+      </search>
     </div>
-    
-    <!-- <div id="project-list" class="projects">-->
-      <!-- <template id="project-card">
-        <div class="hero">
-          <img class="image-full card" src="" alt="">
-          <lis>
-            <h3 style="margin-block: 2px;"></h3>
-            <p class="tags" style="margin-block-start: 0"></p>
-          </lis>
-        </div>
-      </template> </div> -->
-      <div class="hero container">
+      <div class="hero-center container">
         <div class="project-preview">
           <img id="preview-img" class="image-full card" src="" alt="">
         </div>
         <ul id="project-list" class="projects-list"></ul>
         <template id="project-card">
           <lis class="project-item">
-            <h3 style="margin-block: 2px;"></h3>
-            <p class="tags" style="margin-block-start: 0"></p>
+            <h3 style="margin-block: 0px;"></h3>
+            <p class="tags" style="margin-block-start: -5px"></p>
           </lis>
         </template>
       </div>
   </section>
-  <section id="Artwork">
+  <section id="Artwork" class="container">
     <h2>My Artwork</h2>
+    <div class="artwork-carousel">
+      <div class="artwork-track" id="artwork-track">
+
+      </div>
+    </div>
   </section>
   <section id="contact">
     <h2>Liên hệ</h2>
