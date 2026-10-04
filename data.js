@@ -15,3 +15,11 @@ export const projects = [
     tags: ['python'],
     link_img:'' },
 ];
+
+export const artworks = [
+  { id: 1, title: 'Bức tranh 1', link_img: 'image/Zent_16t.jpg' },
+  { id: 2, title: 'Bức tranh 2', link_img: 'image/GonNiuuyen.jpg' },
+  { id: 3, title: 'Bức tranh 3', link_img: 'image/GonNiuuyen.jpg' },
+  { id: 4, title: 'Bức tranh 4', link_img: 'image/Zent_16t.jpg' },
+  { id: 5, title: 'Bức tranh 5', link_img: 'image/Zent_10t.jpg' }
+];
