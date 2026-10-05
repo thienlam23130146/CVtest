@@ -137,6 +137,10 @@ input, textarea {
   cursor: pointer;
 }
 
+.button:hover{
+  transform: translateY(-3px);
+}
+
 :focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 3px;
@@ -148,12 +152,6 @@ input, textarea {
     repeat(auto-fit, minmax(16rem, 1fr));
   gap: var(--space);
   list-style: none;
-}
-.card {
-  /* padding: 1.5rem; */
-  /* border: 1px solid #cbd5e1; */
-  /* border-radius: 0.75rem; */
-  /* background: rgb(195, 203, 255); */
 }
 
 .image-full{
@@ -243,8 +241,8 @@ input, textarea {
 }
 
 #project-search:focus {
-  border-color: #0f766e; /* Viền chuyển màu xanh khi đang gõ */
-  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); /* Tỏa sáng nhẹ */
+  border-color: #0f766e; 
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1); 
 }
 
 .avata-bg{
@@ -266,17 +264,17 @@ input, textarea {
   gap: 16px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Bỏ thanh cuộn mặc định trên Firefox */
+  scrollbar-width: none; 
   /* padding: 10px 0; */
   scroll-snap-type: x mandatory;
 }
 
 .carousel-track::-webkit-scrollbar {
-  display: none; /* Bỏ thanh cuộn mặc định trên Chrome/Safari */
+  display: none; 
 }
 
 .card {
-  flex: 0 0 100%; /* Mặc định 1 hình full khung hình */
+  flex: 0 0 100%;
   max-width: 100%;
   scroll-snap-align: start;
 }
@@ -288,7 +286,6 @@ input, textarea {
   border-radius: 8px;
 }
 
-/* Nút bấm chuyển hình */
 .nav-btn {
   position: absolute;
   top: 50%;
@@ -305,6 +302,39 @@ input, textarea {
 
 .nav-btn:hover {
   background: rgba(0, 0, 0, 0);
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #94a3b8; 
+  background-color: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:nth-child(2) {
+  border-radius: 10px; 
+}
+
+.social-links a:hover {
+  color: #0f766e; 
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
 }
 
 .prev-btn { left: 10px; }

@@ -65,6 +65,7 @@ function render(list) {
   if (list.length > 0) {
     previewImg.src = list[0].link_img || fallbackImg;
     previewImg.alt = list[0].title;
+    previewImg.dataset.href = list[0].link_href || '';
   }
 
   for (const p of list) {
@@ -79,12 +80,22 @@ function render(list) {
     li.addEventListener('mouseenter', () => {
       previewImg.src = p.link_img || fallbackImg;
       previewImg.alt = p.title;
+      previewImg.dataset.href = p.link_href || '';
     });
 
     ul.append(clone);
   }
 }
 render(projects); //in list ra
+
+if (previewImg) {
+  previewImg.addEventListener('click', () => {
+    const targetUrl = previewImg.dataset.href;
+    if (targetUrl) {
+      window.open(targetUrl, '_blank');
+    }
+  });
+}
 
 const tags = [...new Set(
   projects.flatMap((p) => p.tags),
