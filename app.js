@@ -1,4 +1,5 @@
 import { projects, artworks } from './data.js';
+import { loadRepos } from './repos.js';
 
 const ul = document.querySelector(
   '#project-list');
@@ -8,7 +9,8 @@ const previewImg = document.querySelector(
   '#preview-img');
 const pic = document.querySelector(
   '#artwork-card');
-
+const state = document.querySelector('#repos-state');
+const list = document.querySelector('#repo-list');
 // Ảnh mặc định nếu không có link_img
 const fallbackImg = 'image/Zent_16t.jpg';
 
@@ -140,6 +142,35 @@ searchInput.addEventListener('input', (e) => {
   
   render(searchedProjects);
 });
+
+function repoCard(r) {
+  const li = document.createElement('li');
+  const a = document.createElement('a');
+  a.href = r.url;
+  a.textContent = r.name;
+  const p = document.createElement('p');
+  p.textContent = `★ ${r.stars} · ${r.desc}`;
+  li.append(a, p);
+  return li;
+}
+
+async function showRepos(user) {
+  state.textContent = 'Đang tải…';
+  list.textContent = '';
+  try {
+    const repos = await loadRepos(user);
+    state.textContent = repos.length ? ''
+      : 'Chưa có repo công khai.';
+    repos.forEach((r) => list.append(repoCard(r)));
+  } catch (err) {
+    state.textContent = 'Không tải được: ' + err.message;
+    const again = document.createElement('button');
+    again.textContent = 'Thử lại';
+    again.onclick = () => showRepos(user);
+    state.append(again);
+  }
+}
+showRepos('thienlam23130146');
 
 const toggle = document.querySelector(
   '#theme-toggle');
