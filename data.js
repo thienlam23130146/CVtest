@@ -11,12 +11,12 @@ export const projects = [
   link_href: 'https://youtu.be/QshWPJ6NB6w?si=SIWpSG1D_BA4fy52' 
   },
 
-  { id: 3, title: 'Dashboard nhiệt độ',
-    tags: ['web', 'data'],
+  { id: 3, title: '',
+    tags: [],
     link_img:'' },
     
-  { id: 4, title: 'Mô phỏng con lắc',
-    tags: ['python'],
+  { id: 4, title: '',
+    tags: [],
     link_img:'' },
 ];
 
